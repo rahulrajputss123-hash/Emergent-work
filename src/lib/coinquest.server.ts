@@ -137,7 +137,6 @@ export async function completeOnboardingImpl(
     name: string;
     phone?: string | undefined;
     deviceId?: string | undefined;
-    referralCode?: string | undefined;
   },
 ) {
   const patch: { name: string; onboarded: boolean; phone?: string; device_id?: string } = {
@@ -154,15 +153,6 @@ export async function completeOnboardingImpl(
     .single();
   if (error) throw new Error("Could not save your details.");
 
-  if (values.referralCode) {
-    await attachReferralImpl(userId, values.referralCode);
-    const refreshed = await supabaseAdmin
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .maybeSingle();
-    if (refreshed.data) return refreshed.data;
-  }
   return data;
 }
 

@@ -6,7 +6,6 @@ import {
   FileText,
   KeyRound,
   LogOut,
-  Moon,
   Pencil,
   Receipt,
   Shield,
@@ -30,12 +29,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { deleteMyAccount } from "@/lib/account.functions";
 import { signOutEverywhere, useAuth } from "@/lib/auth";
 import { formatMoney } from "@/lib/coinquest";
-import { useTheme } from "@/lib/theme";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
@@ -64,7 +61,6 @@ function ProfilePage() {
   const { session, profile, isAdmin } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { theme, setTheme } = useTheme();
   const removeAccount = useServerFn(deleteMyAccount);
 
   const [editOpen, setEditOpen] = useState(false);
@@ -184,19 +180,6 @@ function ProfilePage() {
           <Switch
             checked={profile?.push_enabled ?? true}
             onCheckedChange={(checked) => savePref.mutate({ push_enabled: checked })}
-          />
-        </div>
-        <div className="flex items-center justify-between p-4">
-          <div>
-            <p className="flex items-center gap-2 font-semibold">
-              <Moon className="size-4 text-primary" /> Dark mode
-            </p>
-            <p className="text-xs text-muted-foreground">Easier on the eyes at night</p>
-          </div>
-          <Switch
-            checked={theme === "dark"}
-            onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-            aria-label="Toggle dark mode"
           />
         </div>
         <div className="flex items-center justify-between p-4">

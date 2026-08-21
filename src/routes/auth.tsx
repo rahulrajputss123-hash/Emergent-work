@@ -50,6 +50,7 @@ function TabButton({
   return (
     <button
       type="button"
+      data-testid={`auth-channel-${active ? "active" : "inactive"}`}
       onClick={onClick}
       className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold transition-colors ${
         active ? "bg-card text-foreground shadow-soft" : "text-muted-foreground"
@@ -170,9 +171,21 @@ function EmailForm() {
         setBusy(true);
         try {
           if (mode === "signup") {
+            const referralCode = String(form.get("referral") ?? "")
+              .trim()
+              .toUpperCase()
+              .slice(0, 20);
+            if (referralCode) {
+              window.localStorage.setItem("coinquest.ref", referralCode);
+            } else {
+              window.localStorage.removeItem("coinquest.ref");
+            }
             const { error } = await supabase.auth.signUp({
               ...parsed.data,
-              options: { emailRedirectTo: window.location.origin },
+              options: {
+                emailRedirectTo: window.location.origin,
+                data: referralCode ? { referral_code: referralCode } : undefined,
+              },
             });
             if (error) throw error;
             toast.success("Check your email to confirm your account.");
@@ -191,6 +204,19 @@ function EmailForm() {
         <Label htmlFor="email">Email</Label>
         <Input id="email" name="email" type="email" autoComplete="email" maxLength={255} />
       </div>
+      {mode === "signup" && (
+        <div className="space-y-1.5">
+          <Label htmlFor="referral">Referral code (optional)</Label>
+          <Input
+            id="referral"
+            name="referral"
+            data-testid="signup-referral-input"
+            autoComplete="off"
+            maxLength={20}
+            placeholder="Enter a friend's code"
+          />
+        </div>
+      )}
       <div className="space-y-1.5">
         <Label htmlFor="password">Password</Label>
         <Input
@@ -227,6 +253,7 @@ function EmailForm() {
 function PhoneForm() {
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
+  const [referral, setReferral] = useState("");
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -243,6 +270,12 @@ function PhoneForm() {
         setBusy(true);
         try {
           if (!sent) {
+            const referralCode = referral.trim().toUpperCase().slice(0, 20);
+            if (referralCode) {
+              window.localStorage.setItem("coinquest.ref", referralCode);
+            } else {
+              window.localStorage.removeItem("coinquest.ref");
+            }
             const { error } = await supabase.auth.signInWithOtp({ phone: parsed.data });
             if (error) throw error;
             setSent(true);
@@ -277,6 +310,20 @@ function PhoneForm() {
           onChange={(e) => setPhone(e.target.value)}
         />
       </div>
+      {!sent && (
+        <div className="space-y-1.5">
+          <Label htmlFor="phone-referral">Referral code (optional)</Label>
+          <Input
+            id="phone-referral"
+            data-testid="signup-phone-referral-input"
+            autoComplete="off"
+            maxLength={20}
+            placeholder="Enter a friend's code"
+            value={referral}
+            onChange={(e) => setReferral(e.target.value)}
+          />
+        </div>
+      )}
       {sent && (
         <div className="space-y-1.5">
           <Label htmlFor="otp">Verification code</Label>
