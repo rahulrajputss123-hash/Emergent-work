@@ -30,6 +30,9 @@ After these changes, verify in preview: (a) app loads normally in light theme wi
 - Added referral inputs to email signup and phone OTP signup flows.
 - Referral values are normalized, stored before account creation, and passed as signup metadata for email signup.
 - Verified focused preview flows at `http://127.0.0.1:8080` and confirmed the production build passes.
+- Configured the Supabase project environment in `.env` with `VITE_SUPABASE_URL`, `SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_PUBLISHABLE_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`.
+- Verified Supabase service-role access and authenticated login with a disposable confirmed test user; the test user was deleted afterward.
+- Verified the browser preview loads with the new Supabase settings and the production build still passes.
 
 ## Prioritized backlog
 
@@ -39,7 +42,7 @@ After these changes, verify in preview: (a) app loads normally in light theme wi
 
 ### P1
 
-- None for the requested scope.
+- Retry a real email signup after Supabase's `over_email_send_rate_limit` clears; the signup endpoint was reachable but rejected the disposable test request due to the provider email-send limit.
 
 ### P2
 
