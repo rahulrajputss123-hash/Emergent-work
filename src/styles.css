@@ -2,8 +2,6 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 /*
  * CashGPT design system.
  * Cream backgrounds, deep jade primary, mint success, coin-gold rewards.
@@ -114,30 +112,6 @@
   --gradient-jade: linear-gradient(140deg, oklch(0.382 0.056 196.8), oklch(0.3 0.045 197.2));
   --gradient-gold: linear-gradient(135deg, oklch(0.86 0.15 85), oklch(0.755 0.164 70.1));
   --gradient-mint: linear-gradient(135deg, oklch(0.84 0.14 163), oklch(0.74 0.16 160));
-}
-
-.dark {
-  --background: oklch(0.22 0.03 197);
-  --background-alt: oklch(0.26 0.035 197);
-  --foreground: oklch(0.96 0.015 85);
-  --card: oklch(0.28 0.035 197);
-  --card-foreground: oklch(0.96 0.015 85);
-  --popover: oklch(0.28 0.035 197);
-  --popover-foreground: oklch(0.96 0.015 85);
-  --primary: oklch(0.784 0.163 161.4);
-  --primary-foreground: oklch(0.2 0.03 197);
-  --primary-soft: oklch(0.36 0.05 197);
-  --secondary: oklch(0.31 0.038 197);
-  --secondary-foreground: oklch(0.96 0.015 85);
-  --muted: oklch(0.31 0.038 197);
-  --muted-foreground: oklch(0.75 0.02 165);
-  --accent: oklch(0.784 0.163 161.4);
-  --accent-foreground: oklch(0.2 0.03 197);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --sidebar: oklch(0.26 0.035 197);
-  --sidebar-foreground: oklch(0.96 0.015 85);
-  --sidebar-border: oklch(1 0 0 / 12%);
 }
 
 @layer base {

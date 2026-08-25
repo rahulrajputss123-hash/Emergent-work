@@ -34,17 +34,10 @@ function OnboardingPage() {
   const save = useServerFn(completeOnboarding);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [referral, setReferral] = useState("");
 
   useEffect(() => {
     if (profile?.onboarded) void navigate({ to: "/home", replace: true });
   }, [profile?.onboarded, navigate]);
-
-  // Referral code is captured on the /auth signup form and stored here.
-  useEffect(() => {
-    const stored = window.localStorage.getItem("coinquest.ref");
-    if (stored) setReferral(stored);
-  }, []);
 
   const mutation = useMutation({
     mutationFn: async () =>
@@ -52,7 +45,6 @@ function OnboardingPage() {
         data: {
           name: name.trim(),
           ...(phone.trim() ? { phone: phone.trim() } : {}),
-          ...(referral.trim() ? { referralCode: referral.trim().toUpperCase() } : {}),
           deviceId: getDeviceId(),
         },
       }),
