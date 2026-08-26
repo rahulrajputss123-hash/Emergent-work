@@ -1,0 +1,12 @@
+{
+  "name": "emergent-work",
+  "compatibility_date": "2026-08-25",
+  "vars": {
+    "SUPABASE_PROJECT_ID": "bhpynnqjgwdjrcokxczu",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_hSNXX5jxs-zJYBEBTyoUUg_3Owo6NSa",
+    "SUPABASE_URL": "https://bhpynnqjgwdjrcokxczu.supabase.co",
+    "VITE_SUPABASE_PROJECT_ID": "bhpynnqjgwdjrcokxczu",
+    "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_hSNXX5jxs-zJYBEBTyoUUg_3Owo6NSa",
+    "VITE_SUPABASE_URL": "https://bhpynnqjgwdjrcokxczu.supabase.co"
+  }
+}
