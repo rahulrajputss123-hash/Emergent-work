@@ -1,6 +1,9 @@
 {
   "name": "emergent-work",
   "compatibility_date": "2026-08-25",
+  "observability": {
+    "enabled": true
+  },
   "vars": {
     "SUPABASE_PROJECT_ID": "bhpynnqjgwdjrcokxczu",
     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_hSNXX5jxs-zJYBEBTyoUUg_3Owo6NSa",
