@@ -58,8 +58,19 @@ function initialsOf(name: string) {
 }
 
 function ProfilePage() {
-  const { session, profile, isAdmin } = useAuth();
+  const { session, profile, isAdmin, loading } = useAuth();
   const navigate = useNavigate();
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+  if (!session) {
+    navigate({ to: "/auth", replace: true });
+    return null;
+  }
   const queryClient = useQueryClient();
   const removeAccount = useServerFn(deleteMyAccount);
 
@@ -73,7 +84,7 @@ function ProfilePage() {
 
   const savePref = useMutation({
     mutationFn: async (values: { push_enabled?: boolean; language?: string; name?: string }) => {
-      const { error } = await supabase.from("profiles").update(values).eq("id", session!.user.id);
+      const { error } = await supabase.from("profiles").update(values).eq("id", session.user.id);
       if (error) throw error;
     },
     onSuccess: () => void queryClient.invalidateQueries({ queryKey: ["profile"] }),
@@ -84,7 +95,7 @@ function ProfilePage() {
     mutationFn: async () => {
       const name = nameDraft.trim();
       if (name.length < 2) throw new Error("short");
-      const { error } = await supabase.from("profiles").update({ name }).eq("id", session!.user.id);
+      const { error } = await supabase.from("profiles").update({ name }).eq("id", session.user.id);
       if (error) throw error;
     },
     onSuccess: async () => {
