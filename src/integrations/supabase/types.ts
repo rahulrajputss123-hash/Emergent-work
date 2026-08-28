@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      banners: {
+        Row: {
+          accent: string
+          banner_type: string
+          cta_label: string | null
+          cta_target: Json | null
+          created_at: string
+          description: string
+          ends_at: string | null
+          eyebrow: string
+          icon: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          priority: number
+          section: string
+          smart_config: Json
+          smart_key: string | null
+          starts_at: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          accent?: string
+          banner_type?: string
+          cta_label?: string | null
+          cta_target?: Json | null
+          created_at?: string
+          description?: string
+          ends_at?: string | null
+          eyebrow?: string
+          icon?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          priority?: number
+          section: string
+          smart_config?: Json
+          smart_key?: string | null
+          starts_at?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          accent?: string
+          banner_type?: string
+          cta_label?: string | null
+          cta_target?: Json | null
+          created_at?: string
+          description?: string
+          ends_at?: string | null
+          eyebrow?: string
+          icon?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          priority?: number
+          section?: string
+          smart_config?: Json
+          smart_key?: string | null
+          starts_at?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       automation_logs: {
         Row: {
           context: Json

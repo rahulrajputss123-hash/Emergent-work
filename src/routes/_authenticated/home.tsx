@@ -1,15 +1,15 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Flame, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 import { AppShell } from "@/components/AppShell";
-import { BannerCarousel } from "@/components/BannerCarousel";
+import type { DisplayBanner } from "@/components/BannerCarousel";
+import { SectionBanners } from "@/components/SectionBanners";
 import { FeaturedOffers } from "@/components/FeaturedOffers";
 import { OfferwallSlot } from "@/components/OfferwallSlot";
 import { StarterQuests } from "@/components/StarterQuests";
 import { SectionTitle } from "@/components/States";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/_authenticated/home")({
@@ -33,31 +33,17 @@ function HomePage() {
   const streak = profile?.streak_count ?? 0;
   const goal = 7;
 
+  const homeFallback: DisplayBanner = {
+    id: "home-welcome",
+    eyebrow: `Welcome back${profile?.name ? `, ${profile.name}` : ""}`,
+    title: "Let's earn today",
+    accent: "jade",
+    progress: { current: streak, goal, suffix: "to bonus" },
+  };
+
   return (
     <AppShell subtitle="Earn as you go">
-      <BannerCarousel
-        banners={[
-          {
-            id: "earn-today",
-            eyebrow: `Welcome back${profile?.name ? `, ${profile.name}` : ""}`,
-            title: "Let's earn today",
-            content: (
-              <>
-                <div className="mt-4 flex items-center gap-2 text-sm">
-                  <Flame className="size-4 text-gold" />
-                  <span className="font-semibold">{streak} day streak</span>
-                  <span className="opacity-70">· {Math.max(0, goal - streak)} to bonus</span>
-                </div>
-                <Progress
-                  value={(Math.min(streak, goal) / goal) * 100}
-                  className="mt-2 h-2 bg-primary-foreground/20"
-                />
-                <div className="h-4" />
-              </>
-            ),
-          },
-        ]}
-      />
+      <SectionBanners section="home" fallback={homeFallback} />
 
       <SectionTitle>Starter Quests</SectionTitle>
       <StarterQuests />
