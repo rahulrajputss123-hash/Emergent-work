@@ -1,0 +1,17 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "description": "Supabase service role (secret) key — from your Supabase project Dashboard > Settings > API > service_role secret key. Needed for server-side admin operations (account management, offer sync, automation). The app boots and renders the UI without it, but admin/server functions fail until it is set.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "ADBLUEMEDIA_API_KEY",
+      "description": "Optional API key for the AdBluemedia offer-wall adapter. Only needed if you use that partner offer network; the app runs fine without it.",
+      "requiredAtBoot": false
+    }
+  ]
+}
