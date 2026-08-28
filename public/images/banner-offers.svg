@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="Offers banner — gift and rewards theme">
+  <defs>
+    <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBF4E1"/>
+      <stop offset="1" stop-color="#F4E7C3"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E8B84B"/>
+      <stop offset="1" stop-color="#C9921F"/>
+    </linearGradient>
+    <linearGradient id="goldSoft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4D67A"/>
+      <stop offset="1" stop-color="#D9A82E"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A5A44"/>
+      <stop offset="1" stop-color="#16392B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="boxTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6D989"/>
+      <stop offset="1" stop-color="#E0AC36"/>
+    </linearGradient>
+    <linearGradient id="boxBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8B84B"/>
+      <stop offset="1" stop-color="#C9921F"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E6149"/>
+      <stop offset="1" stop-color="#173B2C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- cream background -->
+  <rect width="1200" height="480" fill="url(#cream)"/>
+  <rect width="1200" height="480" fill="url(#glow)"/>
+
+  <!-- soft dark-green corner flourishes -->
+  <g fill="#2A5A44" opacity="0.10">
+    <circle cx="120" cy="430" r="190"/>
+    <circle cx="1095" cy="60" r="150"/>
+  </g>
+
+  <!-- decorative dotted arcs -->
+  <g fill="none" stroke="#C9921F" stroke-width="3" opacity="0.35" stroke-dasharray="2 14" stroke-linecap="round">
+    <path d="M860 380 A 150 150 0 0 1 1140 240"/>
+    <path d="M120 300 A 120 120 0 0 1 280 360"/>
+  </g>
+
+  <!-- coin stack -->
+  <g>
+    <ellipse cx="292" cy="332" rx="78" ry="20" fill="#B9841A" opacity="0.35"/>
+    <rect x="222" y="300" width="140" height="26" rx="13" fill="url(#goldSoft)"/>
+    <rect x="222" y="274" width="140" height="26" rx="13" fill="url(#goldSoft)"/>
+    <rect x="222" y="248" width="140" height="26" rx="13" fill="url(#goldSoft)"/>
+    <g fill="#C9921F" opacity="0.5">
+      <rect x="222" y="312" width="140" height="3"/>
+      <rect x="222" y="286" width="140" height="3"/>
+      <rect x="222" y="260" width="140" height="3"/>
+    </g>
+    <circle cx="292" cy="232" r="30" fill="url(#gold)"/>
+    <circle cx="292" cy="232" r="30" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-opacity="0.55"/>
+    <text x="292" y="243" font-family="ui-sans-serif, system-ui, sans-serif" font-size="34" font-weight="800" fill="#7A5A12" text-anchor="middle">★</text>
+  </g>
+
+  <!-- gift box (center) -->
+  <g>
+    <ellipse cx="600" cy="386" rx="150" ry="22" fill="#16392B" opacity="0.18"/>
+    <!-- lid -->
+    <rect x="452" y="232" width="296" height="56" rx="14" fill="url(#boxTop)"/>
+    <rect x="452" y="232" width="296" height="56" rx="14" fill="none" stroke="#B9841A" stroke-width="2" opacity="0.6"/>
+    <!-- body -->
+    <rect x="466" y="288" width="268" height="104" rx="12" fill="url(#boxBody)"/>
+    <rect x="466" y="288" width="268" height="104" rx="12" fill="none" stroke="#B9841A" stroke-width="2" opacity="0.6"/>
+    <!-- vertical ribbon -->
+    <rect x="576" y="232" width="48" height="160" fill="url(#ribbon)"/>
+    <!-- horizontal ribbon -->
+    <rect x="452" y="254" width="296" height="20" fill="url(#ribbon)"/>
+    <!-- bow loops -->
+    <path d="M600 232 C560 196 524 214 540 244 C548 260 580 250 600 240 Z" fill="url(#ribbon)"/>
+    <path d="M600 232 C640 196 676 214 660 244 C652 260 620 250 600 240 Z" fill="url(#ribbon)"/>
+    <!-- bow knot -->
+    <ellipse cx="600" cy="240" rx="20" ry="15" fill="#173B2C"/>
+    <!-- bow tails -->
+    <path d="M588 252 L566 300 L586 286 Z" fill="url(#ribbon)"/>
+    <path d="M612 252 L634 300 L614 286 Z" fill="url(#ribbon)"/>
+    <!-- sparkle on box -->
+    <path d="M504 312 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z" fill="#FFFFFF" opacity="0.75"/>
+  </g>
+
+  <!-- sparkles / confetti -->
+  <g fill="url(#gold)">
+    <path d="M170 150 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3 z"/>
+    <path d="M1040 360 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3 z"/>
+    <path d="M980 150 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 z"/>
+    <path d="M380 120 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 z"/>
+  </g>
+  <g fill="#2A5A44">
+    <path d="M820 250 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3 z" opacity="0.85"/>
+    <path d="M250 410 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 z" opacity="0.8"/>
+    <circle cx="760" cy="180" r="5"/>
+    <circle cx="150" cy="250" r="4" opacity="0.7"/>
+  </g>
+  <g fill="none" stroke="#E8B84B" stroke-width="4" opacity="0.5" stroke-linecap="round">
+    <path d="M890 200 q14 -16 30 -8"/>
+    <path d="M340 360 q-16 -14 -8 -32"/>
+  </g>
+</svg>
