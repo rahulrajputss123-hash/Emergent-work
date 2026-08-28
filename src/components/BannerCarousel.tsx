@@ -35,21 +35,21 @@ const ACCENT_STYLES: Record<
     text: "text-primary-foreground",
     track: "bg-primary-foreground/20",
     bar: "bg-primary-foreground",
-    pill: "bg-primary-foreground/15 text-primary-foreground",
+    pill: "bg-primary-foreground text-primary shadow-soft",
   },
   gold: {
     surface: "bg-gold-gradient text-gold-foreground",
     text: "text-gold-foreground",
     track: "bg-gold-foreground/15",
     bar: "bg-gold-foreground",
-    pill: "bg-gold-foreground/15 text-gold-foreground",
+    pill: "bg-primary text-primary-foreground shadow-soft",
   },
   mint: {
     surface: "bg-mint-gradient text-mint-foreground",
     text: "text-mint-foreground",
     track: "bg-mint-foreground/15",
     bar: "bg-mint-foreground",
-    pill: "bg-mint-foreground/15 text-mint-foreground",
+    pill: "bg-primary text-primary-foreground shadow-soft",
   },
 };
 
@@ -158,7 +158,7 @@ export function BannerCarousel({
                   <div className={`absolute inset-0 ${s.surface} opacity-80`} />
                 </>
               ) : null}
-              <div className="relative p-5">
+              <div className="relative p-4">
                 <div className="flex items-start gap-3">
                   {b.icon ? (
                     <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-black/10 text-xl backdrop-blur-sm">
@@ -197,7 +197,7 @@ export function BannerCarousel({
                   <button
                     type="button"
                     onClick={() => b.cta && onCta(b.cta.target)}
-                    className={`mt-4 rounded-full px-4 py-2 text-sm font-semibold ${s.pill}`}
+                    className={`mt-3 rounded-full px-4 py-1.5 text-sm font-semibold ${s.pill}`}
                   >
                     {b.cta.label}
                   </button>
