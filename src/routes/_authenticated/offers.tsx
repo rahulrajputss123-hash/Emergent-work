@@ -26,7 +26,7 @@ function OffersPage() {
 
       <SectionBanners section="offers" />
 
-      <SectionTitle>Featured Offers</SectionTitle>
+      <SectionTitle className="!m-0">Featured Offers</SectionTitle>
       <FeaturedOffers limit={9} />
       <div className="mt-3 flex justify-center">
         <Link
@@ -37,7 +37,7 @@ function OffersPage() {
         </Link>
       </div>
 
-      <SectionTitle>Offerwall</SectionTitle>
+      <SectionTitle className="!m-0">Offerwall</SectionTitle>
       <OfferwallSlot limit={6} />
       <div className="mt-3 flex justify-center">
         <Link

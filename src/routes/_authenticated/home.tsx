@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { AppShell } from "@/components/AppShell";
 import type { DisplayBanner } from "@/components/BannerCarousel";
@@ -53,9 +53,10 @@ function HomePage() {
       <div className="mt-3 flex justify-center">
         <Link
           to="/featured"
-          className="text-xs font-semibold text-primary underline-offset-4 hover:underline"
+          className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary/15"
         >
           View All
+          <ArrowRight className="size-3.5" />
         </Link>
       </div>
 
@@ -68,67 +69,70 @@ function HomePage() {
       <div className="mt-3 flex justify-center">
         <Link
           to="/offerwall"
-          className="text-xs font-semibold text-primary underline-offset-4 hover:underline"
+          className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary/15"
         >
           View All
+          <ArrowRight className="size-3.5" />
         </Link>
       </div>
       <p className="mt-3 text-center text-xs text-muted-foreground">
         Partner networks activate in the mobile app.
       </p>
 
-      <div className="mt-8 flex items-center gap-3">
-        <div className="h-px flex-1 bg-border" />
-        <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-          About Us
-        </span>
-        <div className="h-px flex-1 bg-border" />
-      </div>
-      <p className="mt-3 text-center text-sm text-muted-foreground">
-        A quick look at what CashGPT offers and how you can earn.
-      </p>
+      <section className="mt-8 rounded-3xl border border-primary/10 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-5">
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+            About Us
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <p className="mt-3 text-center text-sm text-muted-foreground">
+          A quick look at what CashGPT offers and how you can earn.
+        </p>
 
-      <ul className="mt-4 grid grid-cols-2 gap-3">
-        <li className="surface-card p-4">
-          <span className="grid size-10 place-items-center rounded-xl bg-background-alt text-xl">
-            💰
-          </span>
-          <p className="mt-3 font-semibold">Ways to Earn</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Watch ads, complete quests, and finish partner offers to grow your balance.
-          </p>
-        </li>
-        <li className="surface-card p-4">
-          <span className="grid size-10 place-items-center rounded-xl bg-background-alt text-xl">
-            ⚡
-          </span>
-          <p className="mt-3 font-semibold">Instant Payout Guarantee</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Every completed quest reflects in your wallet once it's verified.
-          </p>
-        </li>
-        <li className="surface-card p-4">
-          <span className="grid size-10 place-items-center rounded-xl bg-background-alt text-xl">
-            🎁
-          </span>
-          <p className="mt-3 font-semibold">More Offers, Better Rewards</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Discover different offer types with competitive payout rates.
-          </p>
-        </li>
-        <li className="surface-card p-4">
-          <span className="grid size-10 place-items-center rounded-xl bg-background-alt text-xl">
-            🆘
-          </span>
-          <p className="mt-3 font-semibold">Need Help?</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Our support team is here to help when you need it.
-          </p>
-          <Button size="sm" variant="jade" className="mt-3" asChild>
-            <Link to="/support">Get Help</Link>
-          </Button>
-        </li>
-      </ul>
+        <ul className="mt-4 grid grid-cols-2 gap-3">
+          <li className="surface-card p-4">
+            <span className="grid size-10 place-items-center rounded-xl bg-gold/20 text-xl">
+              💰
+            </span>
+            <p className="mt-3 font-semibold">Ways to Earn</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Watch ads, complete quests, and finish partner offers to grow your balance.
+            </p>
+          </li>
+          <li className="surface-card p-4">
+            <span className="grid size-10 place-items-center rounded-xl bg-mint/20 text-xl">
+              ⚡
+            </span>
+            <p className="mt-3 font-semibold">Instant Payout Guarantee</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Every completed quest reflects in your wallet once it's verified.
+            </p>
+          </li>
+          <li className="surface-card p-4">
+            <span className="grid size-10 place-items-center rounded-xl bg-primary/15 text-xl">
+              🎁
+            </span>
+            <p className="mt-3 font-semibold">More Offers, Better Rewards</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Discover different offer types with competitive payout rates.
+            </p>
+          </li>
+          <li className="surface-card p-4">
+            <span className="grid size-10 place-items-center rounded-xl bg-gold/20 text-xl">
+              🆘
+            </span>
+            <p className="mt-3 font-semibold">Need Help?</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Our support team is here to help when you need it.
+            </p>
+            <Button size="sm" variant="jade" className="mt-3" asChild>
+              <Link to="/support">Get Help</Link>
+            </Button>
+          </li>
+        </ul>
+      </section>
 
       <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
         <Link to="/legal/terms" className="hover:text-foreground hover:underline">

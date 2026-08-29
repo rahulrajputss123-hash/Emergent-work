@@ -40,10 +40,21 @@ export function ErrorState({ onRetry }: { onRetry: () => void }) {
   );
 }
 
-export function SectionTitle({ children, action }: { children: React.ReactNode; action?: React.ReactNode }) {
+export function SectionTitle({
+  children,
+  action,
+  className,
+}: {
+  children: React.ReactNode;
+  action?: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="mb-3 mt-6 flex items-end justify-between gap-3">
-      <h2 className="text-lg">{children}</h2>
+    <div className={`mb-3 mt-6 flex items-end justify-between gap-3 ${className ?? ""}`}>
+      <h2 className="flex items-center gap-2 font-display text-lg text-primary">
+        <span className="h-4 w-1.5 shrink-0 rounded-full bg-gold-dark" aria-hidden="true" />
+        {children}
+      </h2>
       {action}
     </div>
   );
