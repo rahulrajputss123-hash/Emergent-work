@@ -61,9 +61,22 @@ export function FeaturedOffers({
         const pending = mutation.isPending && mutation.variables === offer.id;
         return (
           <li key={offer.id} className="surface-card flex flex-col gap-2 p-3">
-            <span className="grid size-9 place-items-center rounded-xl bg-background-alt">
-              <Gift className="size-4 text-primary" />
-            </span>
+            <span className="grid size-9 place-items-center overflow-hidden rounded-xl bg-background-alt">
+  {offer.icon && offer.icon.startsWith("http") ? (
+    <img
+      src={offer.icon}
+      alt=""
+      className="size-full object-cover"
+      onError={(e) => {
+        e.currentTarget.style.display = "none";
+      }}
+    />
+  ) : (
+    <Gift className="size-4 text-primary" />
+  )}
+</span>
+              
+            
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold leading-tight">{offer.title}</p>
               <p className="line-clamp-2 text-[11px] leading-snug text-muted-foreground">
