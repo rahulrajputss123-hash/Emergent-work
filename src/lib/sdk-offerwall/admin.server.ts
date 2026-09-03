@@ -29,36 +29,52 @@ export function listSdkAdaptersImpl() {
   return { slugs: listSdkAdapterSlugs() };
 }
 
-/** App-facing list — safe fields only, enabled providers in display order. */
+/** App-facing list — safe fields only, enabled providers in display order.
+ *  Includes lock fields so the UI can render locked/unlocked state per user.
+ */
 export async function listPublicSdkProvidersImpl(
   limit?: number,
 ): Promise<PublicSdkOfferwallProvider[]> {
   let query = supabaseAdmin
     .from("sdk_offerwall_providers")
-    .select("id, slug, name, tagline, logo_url, platforms, integration_type, status, display_order")
+    .select(
+      "id, slug, name, tagline, logo_url, platforms, integration_type, status, display_order, time_lock_until, min_lifetime_earned, lock_label, lock_description",
+    )
     .eq("enabled", true)
     .order("display_order", { ascending: true })
     .order("name", { ascending: true });
   if (typeof limit === "number") query = query.limit(limit);
   const { data, error } = await query;
   if (error) throw error;
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    slug: row.slug,
-    name: row.name,
-    tagline: row.tagline,
-    logoUrl: row.logo_url,
-    platforms: row.platforms,
-    integrationType: row.integration_type,
-    status: row.status,
-    displayOrder: row.display_order,
-  }));
+  return (data ?? []).map((row) => {
+    const r = row as Record<string, unknown>;
+    return {
+      id: row.id,
+      slug: row.slug,
+      name: row.name,
+      tagline: row.tagline,
+      logoUrl: row.logo_url,
+      platforms: row.platforms,
+      integrationType: row.integration_type,
+      status: row.status,
+      displayOrder: row.display_order,
+      timeLockUntil: (r["time_lock_until"] as string | null) ?? null,
+      minLifetimeEarned:
+        r["min_lifetime_earned"] != null ? Number(r["min_lifetime_earned"]) : null,
+      lockLabel: String(r["lock_label"] ?? ""),
+      lockDescription: String(r["lock_description"] ?? ""),
+    };
+  });
 }
 
 function toRow(input: SdkProviderInput) {
   return {
     slug: input.slug,
     name: input.name,
+    time_lock_until: input.timeLockUntil ?? null,
+    min_lifetime_earned: input.minLifetimeEarned ?? null,
+    lock_label: input.lockLabel ?? "",
+    lock_description: input.lockDescription ?? "",
     tagline: input.tagline,
     logo_url: input.logoUrl ?? null,
     enabled: input.enabled,

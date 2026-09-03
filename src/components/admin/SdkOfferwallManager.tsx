@@ -26,6 +26,10 @@ const AUTH_MODES = ["none", "signature", "ip_allowlist", "signature_and_ip"] as 
 const EMPTY: SdkProviderInput = {
   slug: "",
   name: "",
+  timeLockUntil: null,
+  minLifetimeEarned: null,
+  lockLabel: "",
+  lockDescription: "",
   tagline: "",
   logoUrl: "",
   enabled: false,
@@ -157,6 +161,62 @@ export function SdkOfferwallManager() {
 
       {form && (
         <div className="surface-card grid gap-3 p-3">
+
+          {/* Lock settings panel */}
+          <div className="rounded-md border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950">
+            <p className="mb-2 text-xs font-semibold text-amber-700 dark:text-amber-300">
+              🔒 Lock settings — leave blank to leave unlocked
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              <Field label="Time lock until (UTC)">
+                <Input
+                  type="datetime-local"
+                  value={
+                    form.timeLockUntil
+                      ? new Date(form.timeLockUntil).toISOString().slice(0, 16)
+                      : ""
+                  }
+                  onChange={(e) =>
+                    patch({
+                      timeLockUntil: e.target.value
+                        ? new Date(e.target.value).toISOString()
+                        : null,
+                    })
+                  }
+                />
+              </Field>
+              <Field label="Min lifetime earned to unlock ($)">
+                <Input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="e.g. 5.00"
+                  value={form.minLifetimeEarned ?? ""}
+                  onChange={(e) =>
+                    patch({
+                      minLifetimeEarned:
+                        e.target.value === "" ? null : Number(e.target.value),
+                    })
+                  }
+                />
+              </Field>
+              <Field label="Lock label (short, shown on card)">
+                <Input
+                  placeholder="e.g. Earn $5 to unlock"
+                  value={form.lockLabel ?? ""}
+                  onChange={(e) => patch({ lockLabel: e.target.value })}
+                />
+              </Field>
+              <Field label="Lock description (tooltip / modal)">
+                <Input
+                  placeholder="e.g. Complete offers to unlock this network"
+                  value={form.lockDescription ?? ""}
+                  onChange={(e) => patch({ lockDescription: e.target.value })}
+                />
+              </Field>
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 gap-2">
             <Field label="Name">
               <Input value={form.name} onChange={(e) => patch({ name: e.target.value })} />
@@ -436,8 +496,37 @@ export function SdkOfferwallManager() {
                     controlMutation.mutate({ id: provider.id, enabled: !provider.enabled })
                   }
                 >
-                  {provider.enabled ? "Enabled" : "Disabled"}
+                  {provider.enabled ? "✓ Enabled" : "✗ Disabled"}
                 </Button>
+                {(() => {
+                  const r = provider as unknown as Record<string, unknown>;
+                  const timeLocked =
+                    r["time_lock_until"] &&
+                    new Date(r["time_lock_until"] as string) > new Date();
+                  const earningLocked =
+                    r["min_lifetime_earned"] != null &&
+                    Number(r["min_lifetime_earned"]) > 0;
+                  if (timeLocked) {
+                    return (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-700 dark:bg-amber-900 dark:text-amber-300">
+                        🔒 Time-locked until{" "}
+                        {new Date(r["time_lock_until"] as string).toLocaleDateString()}
+                      </span>
+                    );
+                  }
+                  if (earningLocked) {
+                    return (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-700 dark:bg-amber-900 dark:text-amber-300">
+                        🔒 Earn ${Number(r["min_lifetime_earned"]).toFixed(2)} to unlock
+                      </span>
+                    );
+                  }
+                  return (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">
+                      🔓 No lock
+                    </span>
+                  );
+                })()}
                 <Button
                   size="sm"
                   variant="outline"
@@ -446,6 +535,10 @@ export function SdkOfferwallManager() {
                       id: provider.id,
                       slug: provider.slug,
                       name: provider.name,
+                      timeLockUntil: (provider as unknown as Record<string, unknown>)["time_lock_until"] as string | null ?? null,
+                      minLifetimeEarned: (provider as unknown as Record<string, unknown>)["min_lifetime_earned"] != null ? Number((provider as unknown as Record<string, unknown>)["min_lifetime_earned"]) : null,
+                      lockLabel: String((provider as unknown as Record<string, unknown>)["lock_label"] ?? ""),
+                      lockDescription: String((provider as unknown as Record<string, unknown>)["lock_description"] ?? ""),
                       tagline: provider.tagline,
                       logoUrl: provider.logo_url ?? "",
                       enabled: provider.enabled,

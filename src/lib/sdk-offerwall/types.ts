@@ -17,6 +17,10 @@ export type JsonObject = { [key: string]: Json };
 
 /** Full admin-facing provider configuration row. */
 export type SdkOfferwallProvider = {
+  time_lock_until: string | null;
+  min_lifetime_earned: number | null;
+  lock_label: string;
+  lock_description: string;
   id: string;
   slug: string;
   name: string;
@@ -68,12 +72,20 @@ export type PublicSdkOfferwallProvider = {
   integrationType: string;
   status: string;
   displayOrder: number;
+  timeLockUntil: string | null;
+  minLifetimeEarned: number | null;
+  lockLabel: string;
+  lockDescription: string;
 };
 
 export type SdkProviderInput = {
   id?: string | undefined;
   slug: string;
   name: string;
+  timeLockUntil?: string | null | undefined;
+  minLifetimeEarned?: number | null | undefined;
+  lockLabel?: string | undefined;
+  lockDescription?: string | undefined;
   tagline: string;
   logoUrl?: string | null | undefined;
   enabled: boolean;
